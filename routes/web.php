@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ElementController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\SpellController;
 use App\Models\Element;
 use App\Models\Spell;
@@ -16,3 +17,4 @@ Route::get('/', function () {
 });
 
 Route::get('/spellbook', [SpellController::class, 'index']);
+Route::get('/match', [GameController::class, 'init_match']);
