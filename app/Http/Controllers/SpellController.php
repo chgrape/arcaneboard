@@ -12,7 +12,9 @@ class SpellController extends Controller
      */
     public function index()
     {
-        //
+        return inertia('Spellbook', [
+            "spells" => Spell::all()
+        ]);
     }
 
     /**
@@ -34,9 +36,19 @@ class SpellController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Spell $spell)
+    public function show(Request $request)
     {
-        //
+        $incoming = $request->validate([
+            'name'=> 'required|string'
+        ]);
+
+        $s = Spell::where('name', $incoming['name'])->first();
+        
+        if (!$s){
+            return response()->json(['message'=>'Item doesnt exist'], 404);
+        }
+
+        return response()->json(['spell' => $s]);
     }
 
     /**
